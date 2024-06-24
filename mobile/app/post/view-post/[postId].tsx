@@ -13,9 +13,6 @@ export default function ViewPostScreen() {
   const [post, setPost] = useState<Post | null>(null);
   const { posts, deletingPost, deletePost } = usePosts();
   const { comments } = useComments();
-  console.log(comments);
-
-  const [postComments, setPostComments] = useState<Comment[]>([]);
 
   useEffect(() => {
     if (pathname) {
@@ -27,15 +24,6 @@ export default function ViewPostScreen() {
       // set post
       if (post) {
         setPost(post);
-
-        // set comments
-        const currentPostComments = comments?.filter(
-          (comment) => (comment.postId as string) === (id as string)
-        );
-
-        if (!currentPostComments) return setPostComments([]);
-
-        setPostComments(currentPostComments || []);
       } else {
         setTimeout(() => {
           router.push("/home");
@@ -49,7 +37,7 @@ export default function ViewPostScreen() {
   return (
     <ScrollView className="flex-1 p-2.5 bg-white">
       <Text className="text-3xl font-bold mb-2.5">{post.title}</Text>
-      <Text className="text-base text-gray-600 mb-5">{post.body}</Text>
+      <Text className="mb-5 text-base text-gray-600">{post.body}</Text>
       <View className="flex-row justify-center mb-5">
         <CustomButton
           title="Update"
@@ -67,14 +55,21 @@ export default function ViewPostScreen() {
         />
       </View>
       <Text className="text-2xl font-bold mb-2.5">Comments</Text>
-      {postComments.map((comment) => (
-        <View key={comment.id} className="bg-gray-100 p-2.5 rounded-md mb-2.5">
-          <Text className="text-base text-gray-800">{comment.body}</Text>
-          <Text className="text-sm text-gray-600 mt-1.5 italic">
-            - {comment.name.split(" ")[0] + " " + comment.name.split(" ")[1]}
-          </Text>
-        </View>
-      ))}
+      {comments?.map(
+        (comment) =>
+          comment.postId === post.id && (
+            <View
+              key={comment.id}
+              className="bg-gray-100 p-2.5 rounded-md mb-2.5"
+            >
+              <Text className="text-base text-gray-800">{comment.body}</Text>
+              <Text className="text-sm text-gray-600 mt-1.5 italic">
+                -{" "}
+                {comment.name.split(" ")[0] + " " + comment.name.split(" ")[1]}
+              </Text>
+            </View>
+          )
+      )}
     </ScrollView>
   );
 }
