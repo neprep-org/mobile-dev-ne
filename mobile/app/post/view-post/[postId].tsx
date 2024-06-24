@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { SafeAreaView, View, Text, FlatList } from "react-native";
+import {
+  SafeAreaView,
+  View,
+  Text,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 import { usePathname, useRouter } from "expo-router";
 import CustomButton from "@/components/CustomButton";
 import usePosts from "@/hooks/usePosts";
 import { Post } from "@/types";
 import useComments from "@/hooks/useComments";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function ViewPostScreen() {
   const router = useRouter();
@@ -30,7 +37,16 @@ export default function ViewPostScreen() {
 
   const renderHeader = () => (
     <>
-      <Text className="mb-2 text-3xl font-bold">{post.title}</Text>
+      <View className="flex-row justify-between">
+        <TouchableOpacity
+          onPress={() => router.push("/home")}
+          className="flex-row items-center h-fit"
+        >
+          <Ionicons name="arrow-back" size={24} />
+          <Text>Back to posts</Text>
+        </TouchableOpacity>
+      </View>
+      <Text className="mt-6 text-3xl font-bold">{post.title}</Text>
       <Text className="mb-6 text-base text-gray-600">{post.body}</Text>
       <View className="flex-row mb-8 justify-evenly">
         <CustomButton

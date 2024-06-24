@@ -29,7 +29,7 @@ export default function HomeScreen() {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <View className="p-3 mb-3 border border-gray-200 rounded-lg shadow-sm">
-            <Text className="text-lg font-semibold">{item.title}</Text>
+            <Text className="mb-6 text-lg font-semibold">{item.title}</Text>
             <Text className="mb-3 text-base text-gray-500">{item.body}</Text>
             <CustomButton
               handlePress={() => router.push(`/post/view-post/${item.id}`)}
