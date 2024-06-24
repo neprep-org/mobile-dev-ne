@@ -25,7 +25,7 @@ const PostView = () => {
 
   useEffect(() => {
     if (pathname) {
-      const id = pathname.split("/")[2];
+      const id = pathname.split("/")[3];
       const post = posts?.find(
         (p) => parseInt(p.id as string, 10) === parseInt(id as string, 10)
       );
@@ -67,7 +67,8 @@ const PostView = () => {
     );
   };
 
-  if (!post) return null;
+  if (!post) return <Text>Loading...</Text>;
+
   return (
     <SafeAreaView className="h-full p-3 bg-white">
       <View className="flex-row justify-between">
@@ -78,17 +79,11 @@ const PostView = () => {
           <Ioicons name="arrow-back" size={24} />
           <Text>Back to posts</Text>
         </TouchableOpacity>
-        <CustomButton
-          isLoading={deletingPost}
-          handlePress={() => deletePost(post.id, true)}
-          title="Delete"
-          variant="outline"
-          titleStyles="text-red-500"
-          containerStyles="border-red-500 w-32 py-1"
-        />
       </View>
       <View className="mt-6">
-        <Text className="text-xl text-gray-800 font-rubiksemibold">Post</Text>
+        <Text className="text-xl text-gray-800 font-rubiksemibold">
+          Update Post
+        </Text>
         <View className="mt-4 mb-5">
           <CustomInput
             value={formData.title}

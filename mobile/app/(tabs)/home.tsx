@@ -32,7 +32,7 @@ export default function HomeScreen() {
             <Text className="text-lg font-semibold">{item.title}</Text>
             <Text className="mb-3 text-base text-gray-500">{item.body}</Text>
             <CustomButton
-              handlePress={() => router.push(`/post/${item.id}`)}
+              handlePress={() => router.push(`/post/view-post/${item.id}`)}
               title="View"
               containerStyles="mt-3"
               variant="outline"

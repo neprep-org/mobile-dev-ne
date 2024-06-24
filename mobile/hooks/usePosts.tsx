@@ -28,7 +28,6 @@ export default function usePosts() {
       return data;
     }
   );
-
   useEffect(() => {
     mutate();
   }, [user]);
