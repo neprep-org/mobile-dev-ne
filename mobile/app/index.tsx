@@ -22,10 +22,14 @@ const Onboarding = () => {
             className="w-[240px] h-[240px]"
           />
           <Text className="text-2xl font-bold font-rubik">
-            Welcome to our app
+            Welcome to our{" "}
+            <Text className=" text-[#6C63FF] font-rubikbold text-2xl">
+              Postra
+            </Text>
           </Text>
           <Text className="py-4 text-lg text-center text-gray-500 ">
-            Welcome to our posting and commenting app. Share your thoughts, engage with others, and discover interesting content.
+            With our posting and commenting app. Share your thoughts, engage
+            with others, and discover interesting content.
           </Text>
           {user ? (
             <CustomButton

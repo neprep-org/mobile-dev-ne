@@ -44,7 +44,7 @@ const AddPost = () => {
   };
 
   return (
-    <SafeAreaView className="justify-center h-full p-3 px-5">
+    <SafeAreaView className="h-full p-3 px-5 mt-8 mb-4">
       <View>
         <Text className="text-xl text-gray-800 font-rubiksemibold">
           Add Post

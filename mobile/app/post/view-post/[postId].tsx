@@ -46,7 +46,7 @@ export default function ViewPostScreen() {
           <Text>Back to posts</Text>
         </TouchableOpacity>
       </View>
-      <Text className="mt-6 text-3xl font-bold">{post.title}</Text>
+      <Text className="mt-6 mb-4 text-3xl font-bold">{post.title}</Text>
       <Text className="mb-6 text-base text-gray-600">{post.body}</Text>
       <View className="flex-row mb-8 justify-evenly">
         <CustomButton

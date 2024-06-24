@@ -17,8 +17,9 @@ const CustomInput = ({
     <View className={`${containerStyles}`}>
       <Text className="pb-1 text-lg font-medium text-gray-800">{label}</Text>
       <TextInput
-        className={`border py-2 px-2 text-base rounded-md border-gray-500 focus:border-cyan-600 ${inputStyles}`}
+        className={`border py-2 px-2 text-base rounded-md border-gray-500 focus:border-[#5249FF] ${inputStyles}`}
         autoCapitalize="none"
+        selectionColor="#6C63FF"
         {...props}
       />
     </View>

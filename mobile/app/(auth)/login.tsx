@@ -58,7 +58,7 @@ const Login = () => {
         <View className="flex flex-row gap-1 mt-3">
           <Text className="text-base">Don't have an account?</Text>
           <Link href={"/signup"}>
-            <Text className="text-base text-cyan-600">signup</Text>
+            <Text className="text-base text-[#6C63FF]">signup</Text>
           </Link>
         </View>
       </View>

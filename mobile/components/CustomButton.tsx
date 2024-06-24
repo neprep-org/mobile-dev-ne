@@ -23,13 +23,13 @@ const CustomButton = ({
       onPress={handlePress}
       className={`${
         variant === "primary"
-          ? "bg-cyan-500"
-          : "bg-white border border-cyan-300"
+          ? "bg-[#6C63FF]"
+          : "bg-white border border-[#5249FF]"
       } w-full px-2 rounded-md flex flex-row justify-center items-center py-2 ${containerStyles}`}
     >
       <Text
         className={`${
-          variant === "primary" ? "text-white" : "text-cyan-500"
+          variant === "primary" ? "text-white" : "text-[#6C63FF]"
         } text-lg font-semibold ${titleStyles}`}
       >
         {title}
@@ -38,7 +38,7 @@ const CustomButton = ({
         <ActivityIndicator
           size={"small"}
           animating={isLoading}
-          color={variant === "primary" ? "white" : "cyan"}
+          color={variant === "primary" ? "white" : "#B8B5F7"}
         />
       )}
     </TouchableOpacity>
