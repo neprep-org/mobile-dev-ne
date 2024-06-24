@@ -39,7 +39,7 @@ const PostView = () => {
         });
       } else {
         setTimeout(() => {
-          router.push("/home");
+          router.push(pathname.replace("update-post", "view-post"));
         }, 1000);
       }
     }
@@ -73,11 +73,13 @@ const PostView = () => {
     <SafeAreaView className="h-full p-3 bg-white">
       <View className="flex-row justify-between">
         <TouchableOpacity
-          onPress={() => router.push("/home")}
+          onPress={() =>
+            router.push(pathname.replace("update-post", "view-post"))
+          }
           className="flex-row items-center h-fit"
         >
           <Ioicons name="arrow-back" size={24} />
-          <Text>Back to posts</Text>
+          <Text>Back to post</Text>
         </TouchableOpacity>
       </View>
       <View className="mt-6">
