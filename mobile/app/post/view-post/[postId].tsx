@@ -1,10 +1,9 @@
-// ViewPostScreen.tsx
 import React, { useEffect, useState } from "react";
-import { View, Text, ScrollView } from "react-native";
+import { SafeAreaView, View, Text, FlatList } from "react-native";
 import { usePathname, useRouter } from "expo-router";
 import CustomButton from "@/components/CustomButton";
 import usePosts from "@/hooks/usePosts";
-import { Comment, Post } from "@/types";
+import { Post } from "@/types";
 import useComments from "@/hooks/useComments";
 
 export default function ViewPostScreen() {
@@ -21,24 +20,19 @@ export default function ViewPostScreen() {
         (p) => parseInt(p.id as string, 10) === parseInt(id as string, 10)
       );
 
-      // set post
       if (post) {
         setPost(post);
-      } else {
-        setTimeout(() => {
-          router.push("/home");
-        }, 1000);
       }
     }
-  }, []);
+  }, [pathname, posts, router]);
 
   if (!post) return <Text>Loading...</Text>;
 
-  return (
-    <ScrollView className="flex-1 p-2.5 bg-white">
-      <Text className="text-3xl font-bold mb-2.5">{post.title}</Text>
-      <Text className="mb-5 text-base text-gray-600">{post.body}</Text>
-      <View className="flex-row justify-center mb-5">
+  const renderHeader = () => (
+    <>
+      <Text className="mb-2 text-3xl font-bold">{post.title}</Text>
+      <Text className="mb-6 text-base text-gray-600">{post.body}</Text>
+      <View className="flex-row mb-8 justify-evenly">
         <CustomButton
           title="Update"
           handlePress={() => router.push(`/post/update-post/${post.id}`)}
@@ -55,21 +49,35 @@ export default function ViewPostScreen() {
         />
       </View>
       <Text className="text-2xl font-bold mb-2.5">Comments</Text>
-      {comments?.map(
-        (comment) =>
-          comment.postId === post.id && (
-            <View
-              key={comment.id}
-              className="bg-gray-100 p-2.5 rounded-md mb-2.5"
-            >
-              <Text className="text-base text-gray-800">{comment.body}</Text>
-              <Text className="text-sm text-gray-600 mt-1.5 italic">
-                -{" "}
-                {comment.name.split(" ")[0] + " " + comment.name.split(" ")[1]}
-              </Text>
-            </View>
-          )
-      )}
-    </ScrollView>
+    </>
+  );
+
+  return (
+    <SafeAreaView className="h-full p-3 mt-8 bg-white">
+      <FlatList
+        data={comments?.filter((comment) => comment.postId == post.id)}
+        keyExtractor={(item) => item.id}
+        ListHeaderComponent={renderHeader}
+        ListEmptyComponent={() => (
+          <View className="items-center justify-center h-full rounded-lg bg-gray-50">
+            <Text className="pt-3 text-lg text-gray-700 ">
+              No comments on this post.
+            </Text>
+          </View>
+        )}
+        renderItem={({ item: comment }) => (
+          <View className="p-3 mb-3 border border-gray-200 rounded-lg shadow-sm">
+            <Text className="mb-3 text-base text-gray-700">{comment.body}</Text>
+            <Text className="text-sm text-gray-400 mt-1.5 italic">
+              -{" "}
+              {comment.name.split(" ")[0] +
+                " " +
+                (comment.name.split(" ")[1] ?? "")}{" "}
+              || {comment.email}
+            </Text>
+          </View>
+        )}
+      />
+    </SafeAreaView>
   );
 }
